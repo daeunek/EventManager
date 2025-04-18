@@ -1,0 +1,52 @@
+<ng-container *ngIf="event$ | async as event; else loader">
+    <div class="container py-5">
+      <div class="blog-post col-12 col-lg-10 mx-auto">
+        <h1 class="post-title mb-3">{{event.name}}</h1>
+        
+        <!-- Event metadata in a single row -->
+        <div class="post-meta mb-4">
+          <span class="meta-item"><span class="me-1">📅</span> {{event.date | date:'EEEE, MMMM d, y, h:mm a'}}</span>
+          <span class="meta-divider">•</span>
+          <span class="meta-item"><span class="me-1">📍</span> {{event.location}}</span>
+          <span class="meta-divider">•</span>
+          <span class="meta-item"><span class="me-1">👥</span> {{event.attendeesCount}} attendees</span>
+        </div>
+        
+        <!-- Featured image (smaller and centered) -->
+        <div class="featured-image-container mb-4">
+          <img [src]="event.featuredImageUrl" [alt]="event.name" class="featured-image">
+        </div>
+        
+        <!-- Categories -->
+        <div *ngIf="event.categories && event.categories.length > 0" class="categories mb-4">
+          <span class="badge bg-primary me-2" *ngFor="let category of event.categories">
+            {{category.name}}
+          </span>
+        </div>
+        
+        <!-- Short description -->
+        <div class="post-description mb-4">
+          <p class="lead">{{event.description}}</p>
+        </div>
+        
+        <!-- Detailed description -->
+        <div class="post-content">
+          <markdown [data]="event.detailDescription"></markdown>
+        </div>
+        
+        <!-- Registration button -->
+        <div class="text-center mt-5">
+          <button class="btn btn-primary px-4 py-2">Register for Event</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  
+  <!-- Loader template -->
+  <ng-template #loader>
+    <div class="text-center mt-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </ng-template>

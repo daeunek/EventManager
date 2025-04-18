@@ -1,0 +1,45 @@
+<div class="container">
+    <h1 calss="mt-3">Events List</h1>
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/admin/events/add']" class="btn btn-primary">Add Event</a>
+    </div>
+
+    <ng-container *ngIf="Events$ | async as events">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Event Date</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Attendees Count</th>
+                    <th>Categories</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pevent of events">
+                    <td>
+                        {{pevent.name }}
+                    </td>
+                    <td>{{pevent.date | date : 'dd-MM-yyyy'}}</td>
+                    <td>{{ pevent.location}}</td>
+                    <td>
+                        {{ pevent.description }}
+                    </td>
+                    <td>
+                        {{ pevent.attendeesCount }}
+                    </td>
+                    <td >
+                        <span *ngFor="let category of pevent.categories">
+                            <span class="badge text-bg-secondary me-2">{{ category.name }}</span>
+                        </span>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" [routerLink]="['/admin/events', pevent.id]">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+</div>

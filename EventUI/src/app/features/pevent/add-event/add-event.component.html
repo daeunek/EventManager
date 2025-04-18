@@ -1,0 +1,112 @@
+<div class="container">
+    <h1 class="mt-3">Add Event</h1>
+    <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+        <div class="mt-2 mb-5">
+
+             <!-- Event Name -->
+            <div class="mt-3">
+                <label for="EName" class="form-label">Event Name</label>
+                <input type="text" class="form-control" id="EName" name="EName" [(ngModel)]="model.name">
+            </div>
+
+            <!-- Event Date and Time -->
+            <div class="mt-3">
+                <label class="form-label">Event Date and Time</label>
+                <div class="row">
+                    <div class="col-md-6 mb-2 mb-md-0">
+                        <input type="date" class="form-control" id="pDate" name="pDate" 
+                            [ngModel]="model.date | date: 'yyyy-MM-dd'"
+                            (ngModelChange)="onDateChange($event)">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="time" class="form-control" id="pTime" name="pTime" 
+                            [ngModel]="model.date | date: 'HH:mm'"
+                            (ngModelChange)="onTimeChange($event)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Location -->
+            <div class="mt-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" name="location" [(ngModel)]="model.location">
+            </div>
+
+            <!-- Short Description -->
+            <div class="mt-3">
+                <label for="description" class="form-label">Short Description</label>
+                <input type="text" class="form-control" id="description" name="description" [(ngModel)]="model.description">
+            </div>
+
+             <!-- Detailed Description -->
+            <div class="mt-3">
+                <label for="content" class="form-label">Detail Desctiption</label>
+                <div class="d-flex flex-row">
+                    <div class="col-6 p-2"> <!--Text Area-->
+                        <textarea id ="content" name ="content" class="form-control" style="height: 350px;max-height: 350px;"[(ngModel)]="model.detailDescription"></textarea>
+                    </div>  
+                    <div class="col-6 p-2" style="max-height: 350px; overflow-y: scroll;">
+                        <markdown [data]="model.detailDescription"></markdown>     <!--model.content is same as Text Area-->
+                    </div>    <!--Live Preview-->
+                </div>
+            </div>
+
+            <!-- Event Attendees Count -->
+            <div class="mt-3">
+                <label for="attendeesCount" class="form-label">Maximum Attendees</label>
+                <input type="number" class="form-control" id="attendeesCount" name="attendeesCount" 
+                       [(ngModel)]="model.attendeesCount" min="0">
+            </div>
+
+             <!-- URL Handle -->
+             <div class="mt-3">
+                <label for="urlHandle" class="form-label">URL Handle</label>
+                <input type="text" class="form-control" id="urlHandle" name="urlHandle" [(ngModel)]="model.urlHandle">
+            </div>
+
+            <!-- Event Image -->
+            <div class="mt-3">
+                <div class="d-flex align-items-center mb-2">
+                    <label for="featuredImgUrl" class="form-label mb-0 me-4">Featured Image Url</label>
+                    <button type="button" class="btn btn-secondary" (click)="openImageSelector()">Select Image</button>
+                </div>
+
+                <ng-container *ngIf="model.featuredImageUrl != ''">
+                    <div>
+                        <img [src]="model.featuredImageUrl" height="100" class="my-2">
+                    </div>
+                </ng-container>
+                <input type="text" class="form-control" id="featuredImgUrl" name="featuredImgUrl" [(ngModel)]="model.featuredImageUrl">
+            </div>
+           
+            <!--Name Has to be defined in two ways data binding and forms, if not it won't show anything about that-->
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="isVisible" [(ngModel)]="model.isVisible" name="isVisible">
+                <label class="form-check-label" for="CheckDefault">
+                    Is Visible? 
+                </label>
+            </div>
+
+            <!--Multi Select drop Down list-->
+            <div class="mt-3">
+                <label for="categories" class="form-label">Categories</label>
+                <ng-container *ngIf="categories$ | async as categories">
+                    <select class="form-control" [(ngModel)]="model.categories" name="categories" id ="categories" multiple>
+                        <option *ngFor="let category of categories" [value]="category.id" >{{category.name}}</option>
+                    </select>
+                </ng-container>
+
+            </div>
+           <div class="mt-3">
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="images-container-modal" [ngClass]="{'d-block' : IsImageSeletorOpen, 'd-none': !IsImageSeletorOpen}">
+    <!-- Image Selector Component selector is used and class is declared in global css-->
+     <button type="btn btn-light" style="position: fixed; top : 10px; right: 10px" (click)="closeImageSelector()">X</button>
+    <app-image-selector></app-image-selector>
+</div>
