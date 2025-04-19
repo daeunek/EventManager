@@ -16,6 +16,8 @@ namespace Data
 
         public DbSet<EventImage> EventImages { get; set; }
 
+        public DbSet<EventRegistration> EventRegistrations { get; set; }
+
         
        
     }

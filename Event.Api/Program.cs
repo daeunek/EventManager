@@ -46,6 +46,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IEventRepository, PEventRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<IEventRegistrationRepository, EventRegistrationRepository>();
 
 
 // Authentication and Authorization
@@ -79,6 +80,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -102,6 +104,12 @@ app.UseCors(options =>
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+builder.Services.AddLogging(logging => 
+{
+    logging.AddConsole();
+    logging.AddDebug();
+});
 
 //image acess url
 app.UseStaticFiles(new StaticFileOptions

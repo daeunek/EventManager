@@ -173,3 +173,4 @@
 /home/eaint/Desktop/KMITL/GoFive/EventManager/Event.Api/bin/Debug/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /home/eaint/Desktop/KMITL/GoFive/EventManager/Event.Api/bin/Debug/net9.0/Microsoft.Extensions.Identity.Core.dll
 /home/eaint/Desktop/KMITL/GoFive/EventManager/Event.Api/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.dll
+/home/eaint/Desktop/KMITL/GoFive/EventManager/Event.Api/obj/Debug/net9.0/Event.Api.sourcelink.json
