@@ -5,10 +5,11 @@ import { pEvent } from '../../../pevent/models/pEvent.model';
 import { PeventService } from '../../../pevent/services/pevent.service';
 import { MarkdownModule } from 'ngx-markdown';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-event-details',
-  imports: [MarkdownModule, CommonModule],
+  imports: [MarkdownModule, CommonModule, RouterModule],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css'
 })

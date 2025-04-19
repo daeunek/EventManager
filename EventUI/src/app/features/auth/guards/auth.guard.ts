@@ -24,19 +24,29 @@ export const authGuard: CanActivateFn = (route, state) => {
     if (expDate < currentTime) {
       // token is expired
       authService.logOut();
-      return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } }); //params will store the url that they try try to access 
+      return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } }); 
     } else {
       // token is valid
-      if (user.roles.includes('Admin')) {
+      // Check if this is a registration route
+      if (state.url.includes('/register-event/')) {
+        // Allow any authenticated user to access registration routes
         return true;
+      } else if (state.url.includes('/admin/')) {
+        // Only admins can access admin routes
+        if (user.roles.includes('Admin')) {
+          return true;
+        } else {
+          alert('You are not authorized to access this page');
+          return router.createUrlTree(['/']);
+        }
       } else {
-        alert('You are not authorized to access this page');
-        return router.createUrlTree(['/']);
+        // For other protected routes, allow any authenticated user
+        return true;
       }
     }
   } else {
     //log out
     authService.logOut();
-    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } }); //params will store the url that they were redirected
+    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } }); 
   }
 };

@@ -1,0 +1,44 @@
+<div class="container">
+    <h1 class="mt-5">My Registered Events</h1>
+
+    <ng-container *ngIf="registrations$ | async as registrations">
+        <div *ngIf="registrations.length > 0; else noRegistrations" class="col-12">
+            <div class="col-12 mb-3" *ngFor="let registration of registrations">
+                <div class="card" style="max-width: 800px;">
+                    <div class="d-flex flex-row">
+                        <div style="width: 200px; height: 100px; overflow: hidden;">
+                            <img src="{{registration.imgUrl}}" class="img-fluid"
+                                 style="width: 100%; height: 100%; object-fit: cover;"
+                                 alt="{{registration.eventName}}">
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div>
+                                <h5 class="card-title">{{registration.eventName}}</h5>
+                                <p class="card-text text-muted mb-1">
+                                    <small>Registered on: {{registration.registeredAt | date:'mediumDate'}}</small>
+                                </p>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-auto">
+                                <button class="btn btn-danger me-2" >Cancel Registration</button>
+                                <a [routerLink]="['/event', registration.eventId]" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <ng-template #noRegistrations>
+            <div class="alert alert-info mt-3">
+                You haven't registered for any events yet.
+            </div>
+        </ng-template>
+    </ng-container>
+
+    <div *ngIf="!(registrations$ | async)" class="d-flex justify-content-center mt-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>

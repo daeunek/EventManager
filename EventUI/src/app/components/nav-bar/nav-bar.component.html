@@ -23,8 +23,16 @@
               </ul>
             </li>
           </ng-container>
+
+          <ng-container *ngIf="user !== undefined && user?.roles?.includes('User') && !user?.roles?.includes('Admin')">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/my-events">RegisteredEvents</a>
+            </li>
+          </ng-container>
       
         </ul>
+
+
 
         <div class="d-flex">
           <ng-container *ngIf="user === undefined ; else showLogout">

@@ -35,9 +35,10 @@
         </div>
         
         <!-- Registration button -->
-        <div class="text-center mt-5">
-          <button class="btn btn-primary px-4 py-2">Register for Event</button>
-        </div>
+        <!-- Registration button with RouterLink -->
+      <div class="text-center mt-5">
+        <a [routerLink]="['/register-event', event.id]" class="btn btn-primary px-4 py-2">Register Event</a>
+      </div>
       </div>
     </div>
   </ng-container>

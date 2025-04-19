@@ -1,0 +1,53 @@
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2>Register for Event</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Loading state -->
+                    <div *ngIf="isLoading" class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Error message -->
+                    <div *ngIf="errorMessage" class="alert alert-danger">
+                        {{ errorMessage }}
+                    </div>
+                    
+                    <!-- Success message -->
+                    <div *ngIf="successMessage" class="alert alert-success">
+                        {{ successMessage }}
+                        <div class="mt-3 text-center">
+                            <a routerLink="/" class="btn btn-primary">Return to Home</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Registration form -->
+                    <form (ngSubmit)="onSubmit()" *ngIf="!isLoading && !errorMessage && !successMessage">
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="contactName" name="contactName" 
+                                [(ngModel)]="model.contactName" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="contactPhone" class="form-label">Contact Phone</label>
+                            <input type="tel" class="form-control" id="contactPhone" name="contactPhone" 
+                                [(ngModel)]="model.contactPhone" required>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-secondary me-md-2" (click)="goBack()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

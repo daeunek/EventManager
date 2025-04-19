@@ -125,18 +125,21 @@ namespace Controllers{
 
             var registrations = await eventRegistrationRepository.GetUserRegistrationsAsync(user.Id);
 
-            var response = new List<EventRegistrationDto>();
+            var response = new List<UserRegistrationResponseDto>();
             foreach (var registration in registrations)
             {
                 var pEvent = await eventRepository.GetById(registration.EventId);
                 if (pEvent != null)
                 {
-                    response.Add(new EventRegistrationDto
+                    response.Add(new UserRegistrationResponseDto
                     {
                         Id = registration.Id,
                         EventId = registration.EventId,
                         UserId = registration.UserId,
                         RegisteredAt = registration.RegisteredAt,
+                        EventDescription = pEvent.Description,
+                        EventLocation = pEvent.Location,
+                        EventDate = pEvent.Date,
                         EventName = pEvent.Name,
                         imgUrl = pEvent.FeaturedImageUrl
                     });

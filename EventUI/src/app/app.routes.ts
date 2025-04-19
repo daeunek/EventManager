@@ -9,6 +9,8 @@ import { HomeComponent } from './features/public/home/home/home.component';
 import { EventDetailsComponent } from './features/public/eventDetails/event-details/event-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './features/auth/guards/auth.guard';
+import { RegisterEventComponent } from './features/registration/register-event/register-event.component';
+import { MyeventsComponent } from './features/registration/myevents/myevents.component';
 
 export const routes: Routes = [
 
@@ -62,5 +64,18 @@ export const routes: Routes = [
         path : 'admin/events/:id',
         component : EditEventComponent,
         canActivate: [authGuard]
+    },
+
+    // registration
+    {
+        path : 'register-event/:id',
+        component : RegisterEventComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'my-events',
+        component : MyeventsComponent,
+        canActivate: [authGuard]
+
     }
 ];
