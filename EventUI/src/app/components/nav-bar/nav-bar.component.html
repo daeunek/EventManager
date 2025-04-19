@@ -37,6 +37,7 @@
         <div class="d-flex">
           <ng-container *ngIf="user === undefined ; else showLogout">
             <!-- show login btn -->
+            <a [routerLink] ="['/register']" class="btn btn-secondary me-2">Register</a>
             <a [routerLink] ="['/login']" class="btn btn-primary">Log In</a>
           </ng-container>
 

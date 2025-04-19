@@ -12,6 +12,7 @@ import { authGuard } from './features/auth/guards/auth.guard';
 import { RegisterEventComponent } from './features/registration/register-event/register-event.component';
 import { MyeventsComponent } from './features/registration/myevents/myevents.component';
 import { AdminViewRegisterEventsComponent } from './features/registration/admin-view-register-events/admin-view-register-events.component';
+import { RegisterComponent } from './features/auth/register/register.component';
 
 export const routes: Routes = [
 
@@ -22,6 +23,10 @@ export const routes: Routes = [
     },
 
     //login
+    {
+        path : 'register',
+        component : RegisterComponent
+    },
     {
         path : 'login',
         component : LoginComponent

@@ -40,5 +40,13 @@ export class EventRegisterService {
     );
   }
 
+  cancelRegister(registrationId: string) : Observable<RegisterEventResponse> {
+    return this.http.delete<RegisterEventResponse>(`${environment.apiBaseUrl}/api/eventregister/${registrationId}`, {
+      headers: {
+        'Authorization': this.cookieService.get('Authorization')
+      }
+    });
+  }
+
 }
 
