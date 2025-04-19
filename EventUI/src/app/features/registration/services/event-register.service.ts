@@ -28,4 +28,17 @@ export class EventRegisterService {
       }
     });
   }
+
+  getAdminViewEvents(eventId: string): Observable<RegisterEventResponse[]> {
+    return this.http.get<RegisterEventResponse[]>(
+      `${environment.apiBaseUrl}/api/eventregister/${eventId}`, 
+      {
+        headers: {
+          'Authorization': this.cookieService.get('Authorization')
+        }
+      }
+    );
+  }
+
 }
+

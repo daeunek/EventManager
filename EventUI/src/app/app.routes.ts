@@ -11,6 +11,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './features/auth/guards/auth.guard';
 import { RegisterEventComponent } from './features/registration/register-event/register-event.component';
 import { MyeventsComponent } from './features/registration/myevents/myevents.component';
+import { AdminViewRegisterEventsComponent } from './features/registration/admin-view-register-events/admin-view-register-events.component';
 
 export const routes: Routes = [
 
@@ -64,6 +65,14 @@ export const routes: Routes = [
         path : 'admin/events/:id',
         component : EditEventComponent,
         canActivate: [authGuard]
+    },
+
+    //admin regisered events
+    {
+        path : 'admin/view-registrations/:id',
+        component : AdminViewRegisterEventsComponent,
+        canActivate: [authGuard]
+        
     },
 
     // registration

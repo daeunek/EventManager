@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MyRegistrationResponse } from '../models/MyRegistrationResponse';
 import { EventRegisterService } from '../services/event-register.service';
+import { RegisterEventResponse } from '../models/registerEventResponse';
 
 @Component({
   selector: 'app-myevents',

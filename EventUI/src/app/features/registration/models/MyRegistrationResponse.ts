@@ -5,8 +5,6 @@ export interface MyRegistrationResponse {
     registeredAt: Date;
     
     eventName: string;
-    eventDescription: string;
-    eventLocation: string;
-    eventDate: Date;
+    
     imgUrl: string;
 }
